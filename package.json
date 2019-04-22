@@ -1,0 +1,41 @@
+{
+  "name": "code-sprint",
+  "version": "1.0.0",
+  "description": "An educational typing game",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development webpack-dev-server --open & nodemon ./server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-asmr/code-sprint.git"
+  },
+  "author": "team-asmr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/team-asmr/code-sprint/issues"
+  },
+  "homepage": "https://github.com/team-asmr/code-sprint#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg": "^7.10.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "redux": "^4.0.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "nodemon": "^1.18.11",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
