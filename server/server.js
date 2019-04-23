@@ -6,6 +6,7 @@ const cookieparser = require('cookie-parser');
 
 const sessionController = require('./controllers/sessionController');
 const userController = require('./controllers/userController');
+const snippetController = require('./controllers/snippetController');
 
 const PORT = 3000;
 
@@ -15,20 +16,28 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-app.post('/signup', userController.createUser, (req, res) => {
-  res.send('Success');
+app.post('/signup', userController.createUser, sessionController.createSession, (req, res) => {
+  res.json(res.locals.user.id);
 });
 
-app.post('/submitsnippet', userController.submitSnippet, (req, res) => {
-  res.send('Successfully submitted snippet')
+app.post('/snippet', snippetController.submitSnippet, (req, res) => {
+  res.send('Successfully submitted snippet');
 })
 
-app.put('/favesnippet', userController.favoriteSnippet, (req, res) => {
-  res.send('Liked Snippet')
+app.put('/snippet', snippetController.favoriteSnippet, (req, res) => {
+  res.send('Liked Snippet');
 })
 
-app.post('/login', (req, res) => {
-  res.send('Success');
+app.get('/snippet', snippetController.getSnippet, (req, res) => {
+  res.json(res.locals.snippets);
+});
+
+app.get('/login', sessionController.verifySession, (req, res) => {
+  res.json('No session');
+});
+
+app.post('/login', userController.verifyUser, (req, res) => {
+  res.json(res.locals.user.id);
 });
 
 app.use('*', (req, res) => {
@@ -42,6 +51,6 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {console.log(`Listening on port ${PORT}...`)});
 
-//   (\__/)
+//  (\____/)
 //  (='.'=)
 // ('')_('')
