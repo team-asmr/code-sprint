@@ -5,12 +5,6 @@ client.on('connect', ()=>{
   console.log('Connected to Redis.');
 });
 
-// client.set("ray", "hi");
-// client.get("ray", (err, res) => {
-//   if (err) console.log('err:', err);
-//   if (res) console.log('res:', res)
-// })
-
 sessionController = {};
 
 sessionController.createSession = (req, res, next) => {

@@ -36,7 +36,7 @@ app.get('/login', sessionController.verifySession, (req, res) => {
   res.json('No session');
 });
 
-app.post('/login', userController.verifyUser, (req, res) => {
+app.post('/login', userController.verifyUser, sessionController.createSession, (req, res) => {
   res.json(res.locals.user.id);
 });
 
