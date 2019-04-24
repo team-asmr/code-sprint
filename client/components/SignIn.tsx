@@ -1,12 +1,10 @@
 import * as React from "react";
 
 interface SignInProps {
-  players: {
-    uid: string,
-    isReady: boolean,
-    username: string,
-    password: string,
-  }[],
+  uid: string,
+  isReady: boolean,
+  username: string,
+  password: string,
   updateUsername: any,
   updatePassword: any,
   updateUid: any,
