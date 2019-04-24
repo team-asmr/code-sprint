@@ -24,7 +24,7 @@ interface AppProps {
   uid: string,
 }
 
-class App:React.Component<AppProps> = (props) => {
+ class App extends React.Component<AppProps>  {
   constructor(props: AppProps){
     super(props)
   }
@@ -36,7 +36,7 @@ class App:React.Component<AppProps> = (props) => {
       </div>
     )
   }
-  
+
 }
 
 
