@@ -31,9 +31,10 @@ const App = (props) => {
     typeSet: '',
     isLoggedIn: false
   }) 
+
     return (
       <div className='app'>
-        {state.isLoggedIn ? <Play {...this.props} setState={setState} /> : <SignIn {...this.props}/>}
+        {state.isLoggedIn ? <Play setState={setState} /> : <SignIn state={state} setState={setState}/>}
       </div>
     )
 }

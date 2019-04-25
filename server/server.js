@@ -1,23 +1,23 @@
 const express = require('express');
-const app = express();
 const path = require('path');
-const bodyparser = require('body-parser');
-const cookieparser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
-
+const app = express();
 const sessionController = require('./controllers/sessionController');
 const userController = require('./controllers/userController');
 const snippetController = require('./controllers/snippetController');
-
 const PORT = 3000;
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
-app.use(bodyparser.json(), cookieparser(), cors());
+app.use(bodyParser.json(), cookieParser(), cors());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-app.post('/signup', userController.createUser, sessionController.createSession, (req, res) => {
+app.post('/signUp', userController.createUser, sessionController.createSession, (req, res) => {
   res.json(res.locals.user.id);
 });
 
@@ -33,7 +33,7 @@ app.get('/snippet', snippetController.getSnippet, (req, res) => {
   res.json(res.locals.snippets);
 });
 
-app.get('/login', sessionController.verifySession, (req, res) => {
+app.get('/login', sessionController.verifySession, sessionController.createSession, (req, res) => {
   res.json('No session');
 });
 
@@ -50,7 +50,13 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong');
 })
 
-app.listen(PORT, () => {console.log(`Listening on port ${PORT}...`)});
+io.on('connection', (client) => {
+  console.log('A user has connected')
+})
+
+server.listen(PORT, () => {console.log(`Listening on port ${PORT}...`)});
+
+// app.listen(PORT, () => {console.log(`Listening on port ${PORT}...`)});
 
 //  (\____/)
 //  (='.'=)
