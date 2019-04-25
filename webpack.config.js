@@ -2,7 +2,7 @@ const path = require('path');
 // const webpack = require('webpack');
 
 module.exports = {
-  entry: './client/index.tsx',
+  entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
@@ -14,23 +14,8 @@ module.exports = {
       '/': 'http://localhost:3000',
     },
   },
-  devtool: "source-map",
-  resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"],
-  },
   module: {
     rules: [
-      {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true,
-            },
-          },
-        ],
-      },
       {
         test: /\.jsx?/,
         exclude: path.resolve(__dirname, 'node_modules'),
@@ -42,7 +27,7 @@ module.exports = {
             },
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: ["style-loader", "css-loader"],
       }
     ]

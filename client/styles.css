@@ -1,0 +1,15 @@
+body {
+  font-size: 2em;
+}
+
+.pending {
+  color: grey;
+}
+
+.correct {
+  color: green;
+}
+
+.incorrect {
+  color: red;
+}
