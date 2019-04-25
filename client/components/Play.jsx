@@ -6,7 +6,6 @@ const Play = props => {
   const [ pending, setPending ] = useState(snippet);
   const [ correct, setCorrect ] = useState('');
   const [ incorrect, setIncorrect ] = useState('');
-  const [ removed, setRemoved ] = useState('');
   const [ typed, setTyped ] = useState('');
 
   let ref;
@@ -63,6 +62,7 @@ const Play = props => {
       tabIndex="0"
       ref={c => ref = c}
     >
+      <h2>Let's Play.</h2>
       <div className="snippet">
         <p>Prompt:</p>
         <pre>

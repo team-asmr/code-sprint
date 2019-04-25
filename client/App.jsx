@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
 
 import Play from './components/Play.jsx';
+import Login from './components/Login.jsx';
 
 import './styles.css';
 
 const App = (props) => {
-  const [state, setState] = useState();
+  const [display, setDisplay] = useState(0);
 
-  return (
-    <div>
-      Let's play.
-      <Play />
-    </div>
-  )
+  switch (display) {
+    case 0:
+      return (
+        <div>
+          <Login />
+        </div>
+      )
+    case 1:
+      
+    case 2:
+      return (
+        <div>
+          <Play />
+        </div>
+      )
+    default:
+      return null;
+  }
+  
 }
 
 export default App;
