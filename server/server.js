@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const bodyparser = require('body-parser');
 const cookieparser = require('cookie-parser');
+const cors = require('cors');
 
 const sessionController = require('./controllers/sessionController');
 const userController = require('./controllers/userController');
@@ -10,7 +11,7 @@ const snippetController = require('./controllers/snippetController');
 
 const PORT = 3000;
 
-app.use(bodyparser.json(), cookieparser());
+app.use(bodyparser.json(), cookieparser(), cors());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
@@ -37,7 +38,7 @@ app.get('/login', sessionController.verifySession, (req, res) => {
 });
 
 app.post('/login', userController.verifyUser, sessionController.createSession, (req, res) => {
-  res.json(res.locals.user.id);
+  res.json(res.locals.user);
 });
 
 app.use('*', (req, res) => {

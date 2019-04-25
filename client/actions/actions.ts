@@ -8,7 +8,8 @@ export enum actionTypes {
   UPDATE_STATUS = "UPDATE_STATUS",
   TYPING_WORD = "TYPING_WORD",
   MATCH_WORD = "MATCH_WORD",
-  UPDATE_SCORE = "UPDATE_SCORE"
+  UPDATE_SCORE = "UPDATE_SCORE",
+  LOGIN_USER = "LOGIN_USER"
 }
 
 export const gameActions = {
@@ -18,5 +19,6 @@ export const gameActions = {
   updateStatus: (entry: boolean) => action(actionTypes.UPDATE_STATUS, entry),
   typingWord: (entry: string) => action(actionTypes.TYPING_WORD, entry),
   matchWord: (entry: string) => action(actionTypes.MATCH_WORD, entry), //unsure about entry type
-  updateScore: (score: number) => action(actionTypes.UPDATE_SCORE, score)
+  updateScore: (score: number) => action(actionTypes.UPDATE_SCORE, score),
+  loginUser: () => action(actionTypes.LOGIN_USER)
 };
