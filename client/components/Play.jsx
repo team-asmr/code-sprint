@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
-import snippet from './snippet';
+import Axios from 'axios';
 
 const Play = props => {
+  const [ snippet, setSnippet ] = useState('');
   const [ pending, setPending ] = useState(snippet);
   const [ correct, setCorrect ] = useState('');
   const [ incorrect, setIncorrect ] = useState('');
@@ -11,8 +11,19 @@ const Play = props => {
   let ref;
 
   useEffect(()=>{
+    fetchRandomSnippet();
     ref.focus();
   }, [])
+
+  const fetchRandomSnippet = () => {
+    Axios.get('/snippet')
+      .then(result => {
+        const randomSnippet = result.data[Math.floor(Math.random(0,1)*result.data.length)].content;
+        setSnippet(randomSnippet);
+        setPending(randomSnippet);
+      })
+      .catch(err => console.log(err));
+  }
   
   const handleKeyPress = e => {
     // console.log(e.key);
@@ -22,10 +33,7 @@ const Play = props => {
     } else {
       setIncorrect(incorrect + (pending[0] || ''));
     }
-    // let newPending;
-    // if (pending.length > 1) newPending = pending.slice(1);
-    // else if(pending) newPending = pending;
-    // else newPending = '';
+
     if (pending) setPending(pending.slice(1));
     setTyped(typed + char);
 
