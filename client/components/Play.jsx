@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import 'babel-polyfill';
+import Axios from 'axios';
 
 import snippet from './snippet';
 
 const Play = props => {
-  const [ pending, setPending ] = useState(snippet);
+  const [ pending, setPending ] = useState('');
   const [ correct, setCorrect ] = useState('');
   const [ incorrect, setIncorrect ] = useState('');
   const [ removed, setRemoved ] = useState('');
+
+  const fetchRandomSnippet = async () => {
+    const result = await Axios.get('/snippet')
+    let randomSnippet = result.data[Math.floor(Math.random(0,1)*result.data.length)].content;
+    setPending(randomSnippet);
+  }
 
   let ref;
 
   useEffect(()=>{
     ref.focus();
+    fetchRandomSnippet();
   }, [])
   
   const handleKeyPress = e => {
@@ -58,6 +67,7 @@ const Play = props => {
       tabIndex="0"
       ref={c => ref = c}
     >
+      Type this stuff:
       <div className="snippet">
         <pre>
           <span className="correct">{correct}</span>

@@ -3,9 +3,10 @@ const pool = require('./db');
 const snippetController = {};
 
 snippetController.submitSnippet = (req, res, next) => {
-  const { name, content, created_by } = req.body;
+  let { name, content, created_by } = req.body;
+  // content = `${content.replace("\n", ' + CHR(10) +')}`
   pool.query(`INSERT INTO snippets (name, content, created_by, num_faves)
-                VALUES ($1, $2, $3, 0) RETURNING *`, [name, content, created_by])
+                VALUES ($1, E'${content}', $2, 0) RETURNING *`, [name, created_by])
     .then((resp) => {
       console.log('row after submitting snippet', resp.rows[0])
       next();
