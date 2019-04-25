@@ -9,7 +9,7 @@ const App = (props) => {
 
   return (
     <div>
-      hello, world.
+      Let's play.
       <Play />
     </div>
   )

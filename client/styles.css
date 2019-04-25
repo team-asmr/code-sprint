@@ -13,3 +13,7 @@ body {
 .incorrect {
   color: red;
 }
+
+.current {
+  border-bottom: solid;
+}
